@@ -17,6 +17,10 @@ function create_provider_instance(::Val{provider_symbol}; config::Dict{Symbol,An
     throw(MethodError(create_provider_instance, (Val(provider_symbol), config)))
 end
 
+function create_provider_instance(provider_id::Symbol; config::Dict{Symbol,Any} = Dict{Symbol, Any}())
+    create_provider_instance(Val(provider_id); config=config)
+end
+
 function chat_stream(provider::AbstractLLMProvider, model::String, messages::Vector{<:AbstractMessage}; kwargs...)
     throw(MethodError(chat_stream, (provider, model, messages)))
 end
@@ -24,6 +28,36 @@ end
 abstract type AbstractModel end
 model_name(model::AbstractModel) = error("model_name not implemented for $(typeof(model))")
 model_provider(model::AbstractModel) = error("model_provider not implemented for $(typeof(model))")
+
+# AbstractEmbedder interface for context management
+abstract type AbstractEmbedder end
+
+function embed(embedder::AbstractEmbedder, text::String)
+    throw(MethodError(embed, (embedder, text)))
+end
+
+function embed(embedder::AbstractEmbedder, texts::Vector{String})
+    throw(MethodError(embed, (embedder, texts)))
+end
+
+function embedding_dimension(embedder::AbstractEmbedder)
+    throw(MethodError(embedding_dimension, (embedder,)))
+end
+
+function create_embedder(provider::AbstractLLMProvider, model::String; kwargs...)
+    throw(MethodError(create_embedder, (provider, model)))
+end
+
+# AbstractContextStore interface
+abstract type AbstractContextStore end
+
+function add_message!(store::AbstractContextStore, message::AbstractMessage; kwargs...)
+    throw(MethodError(add_message!, (store, message)))
+end
+
+function clear_history!(store::AbstractContextStore)
+    throw(MethodError(clear_history!, (store,)))
+end
 
 function list_provider_models(provider_id::Symbol, config::Dict{Symbol,Any})
     list_provider_models(Val(provider_id), config)
