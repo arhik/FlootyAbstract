@@ -25,6 +25,11 @@ function chat_stream(provider::AbstractLLMProvider, model::String, messages::Vec
     throw(MethodError(chat_stream, (provider, model, messages)))
 end
 
+function create_stream(provider::AbstractLLMProvider, model::String, messages::Vector{<:AbstractMessage},
+                       stream::Bool=false, format=nothing, options=nothing, tools=nothing)
+    throw(MethodError(create_stream, (provider, model, messages)))
+end
+
 abstract type AbstractModel end
 model_name(model::AbstractModel) = error("model_name not implemented for $(typeof(model))")
 model_provider(model::AbstractModel) = error("model_provider not implemented for $(typeof(model))")
