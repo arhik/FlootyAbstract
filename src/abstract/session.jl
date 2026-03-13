@@ -11,7 +11,8 @@ session_updated_at(session::AbstractSession) = error("session_updated_at not imp
 
 @enum SessionStatus SESSION_ACTIVE SESSION_PAUSED SESSION_CLOSED
 
-create_session(name::String; kwargs...) = error("create_session not implemented")
+create_session(name; kwargs...) = error("create_session not implemented")
+
 pause_session(session::AbstractSession) = error("pause_session not implemented for $(typeof(session))")
 resume_session(session::AbstractSession) = error("resume_session not implemented for $(typeof(session))")
 close_session(session::AbstractSession) = error("close_session not implemented for $(typeof(session))")
@@ -21,3 +22,13 @@ remove_agent_from_session!(session::AbstractSession, agent_id::Base.UUID) = erro
 get_agent_from_session(session::AbstractSession, agent_id::Base.UUID) = error("get_agent_from_session not implemented for $(typeof(session))")
 
 create_subagent_in_session!(session::AbstractSession, parent::AbstractAgent, name::String; kwargs...) = error("create_subagent_in_session! not implemented for $(typeof(session))")
+
+abstract type AbstractSessionManager end
+
+create_session!(manager::AbstractSessionManager, name::String; kwargs...) = error("create_session! not implemented for $(typeof(manager))")
+get_session(manager::AbstractSessionManager, session_id) = error("get_session not implemented for $(typeof(manager))")
+get_active_session(manager::AbstractSessionManager) = error("get_active_session not implemented for $(typeof(manager))")
+set_active_session!(manager::AbstractSessionManager, session_id) = error("set_active_session! not implemented for $(typeof(manager))")
+list_sessions(manager::AbstractSessionManager) = error("list_sessions not implemented for $(typeof(manager))")
+close_session!(manager::AbstractSessionManager, session_id) = error("close_session! not implemented for $(typeof(manager))")
+close_all_sessions!(manager::AbstractSessionManager) = error("close_all_sessions! not implemented for $(typeof(manager))")
