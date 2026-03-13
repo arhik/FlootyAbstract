@@ -5,6 +5,7 @@ include("abstract.jl")
 export AbstractLLMProvider, AbstractProviderObject, AbstractMessage
 export AbstractEmbedder, AbstractContextStore
 export AbstractTool, AbstractToolCall
+export AbstractAgent, role, provider, context, tools, chat
 export ToolResult
 export AbstractFlootyError, ToolError, error_message
 export role, content, tool_calls, tool_call_id, tool_name

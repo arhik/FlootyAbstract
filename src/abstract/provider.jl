@@ -21,7 +21,8 @@ function create_provider_instance(provider_id::Symbol; config::Dict{Symbol,Any} 
     create_provider_instance(Val(provider_id); config=config)
 end
 
-function chat_stream(provider::AbstractLLMProvider, model::String, messages::Vector{<:AbstractMessage}; kwargs...)
+function chat_stream(provider::AbstractLLMProvider, model::String, messages::Vector{<:AbstractMessage},
+                     stream::Bool=false, format=nothing, options=nothing, tools=nothing)
     throw(MethodError(chat_stream, (provider, model, messages)))
 end
 
