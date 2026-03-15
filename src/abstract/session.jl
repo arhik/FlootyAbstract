@@ -1,4 +1,4 @@
-abstract type AbstractSession end
+abstract type AbstractSession <: AbstractPersistable end
 
 session_id(session::AbstractSession) = error("session_id not implemented for $(typeof(session))")
 session_name(session::AbstractSession) = error("session_name not implemented for $(typeof(session))")
@@ -8,6 +8,7 @@ session_workspace(session::AbstractSession) = error("session_workspace not imple
 session_context(session::AbstractSession) = error("session_context not implemented for $(typeof(session))")
 session_created_at(session::AbstractSession) = error("session_created_at not implemented for $(typeof(session))")
 session_updated_at(session::AbstractSession) = error("session_updated_at not implemented for $(typeof(session))")
+session_tools(session::AbstractSession) = error("session_tools not implemented for $(typeof(session))")
 
 @enum SessionStatus SESSION_ACTIVE SESSION_PAUSED SESSION_CLOSED
 
@@ -32,3 +33,6 @@ set_active_session!(manager::AbstractSessionManager, session_id) = error("set_ac
 list_sessions(manager::AbstractSessionManager) = error("list_sessions not implemented for $(typeof(manager))")
 close_session!(manager::AbstractSessionManager, session_id) = error("close_session! not implemented for $(typeof(manager))")
 close_all_sessions!(manager::AbstractSessionManager) = error("close_all_sessions! not implemented for $(typeof(manager))")
+
+abstract type AbstractWorkflow end
+
