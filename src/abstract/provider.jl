@@ -9,6 +9,10 @@ tool_calls(msg::AbstractMessage) = nothing
 tool_call_id(msg::AbstractMessage) = nothing
 tool_name(msg::AbstractMessage) = nothing
 
+function provider_name(provider::AbstractLLMProvider)
+    throw(MethodError(provider_name, (provider,)))
+end
+
 function create_message(provider::AbstractLLMProvider, role::String, content::String; kwargs...)
     throw(MethodError(create_message, (provider, role, content)))
 end
