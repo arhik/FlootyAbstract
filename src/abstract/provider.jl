@@ -1,5 +1,6 @@
 abstract type AbstractLLMProvider end
 abstract type AbstractProviderObject end
+abstract type AbstractAttachment <: AbstractProviderObject end
 abstract type AbstractMessage <: AbstractProviderObject end
 
 # Interface functions with default implementations
@@ -8,6 +9,7 @@ content(msg::AbstractMessage) = error("content not implemented for $(typeof(msg)
 tool_calls(msg::AbstractMessage) = nothing
 tool_call_id(msg::AbstractMessage) = nothing
 tool_name(msg::AbstractMessage) = nothing
+images(msg::AbstractMessage) = nothing  # Returns Vector{<:AbstractProviderObject} or nothing
 
 function provider_name(provider::AbstractLLMProvider)
     throw(MethodError(provider_name, (provider,)))
@@ -15,6 +17,31 @@ end
 
 function create_message(provider::AbstractLLMProvider, role::String, content::String; kwargs...)
     throw(MethodError(create_message, (provider, role, content)))
+end
+
+function create_message(provider::AbstractLLMProvider, role::String, content::String, images::Vector{<:AbstractProviderObject}; kwargs...)
+    throw(MethodError(create_message, (provider, role, content, images)))
+end
+
+# New interface: create message with attachments (replaces images)
+function create_message(provider::AbstractLLMProvider, role::String, content::String, attachments::Vector{<:AbstractAttachment}; kwargs...)
+    throw(MethodError(create_message, (provider, role, content, attachments)))
+end
+
+# Abstract attachment interface
+attachment_path(att::AbstractAttachment) = error("attachment_path not implemented for $(typeof(att))")
+attachment_type(att::AbstractAttachment) = error("attachment_type not implemented for $(typeof(att))")  # :image, :audio, :video, :pdf, etc.
+attachment_mime(att::AbstractAttachment) = error("attachment_mime not implemented for $(typeof(att))")
+
+# Create provider-specific attachment objects from file paths
+# Returns Vector{<:AbstractAttachment} that can be passed to create_message
+function create_attachments(provider::AbstractLLMProvider, paths::Vector{String}, mime_types::Vector{String})
+    throw(MethodError(create_attachments, (provider, paths, mime_types)))
+end
+
+# Legacy image data creation (deprecated in favor of attachments)
+function create_image_data(provider::AbstractLLMProvider, data::Union{String, Vector{UInt8}})
+    throw(MethodError(create_image_data, (provider, data)))
 end
 
 function create_provider_instance(::Val{provider_symbol}; config::Dict{Symbol,Any} = Dict{Symbol, Any}()) where {provider_symbol}
