@@ -17,6 +17,12 @@ function convert_tool(tool, provider::AbstractLLMProvider)
     throw(MethodError(convert_tool, (tool, provider)))
 end
 
+# Build provider-specific tool from provider-agnostic tool definition
+# Implementations in provider packages (e.g., FlootyStreams for OllamaProvider)
+function build_tool(tool::AbstractTool, provider::AbstractLLMProvider)
+    throw(MethodError(build_tool, (tool, provider)))
+end
+
 struct ToolResult
     success::Bool
     data::String

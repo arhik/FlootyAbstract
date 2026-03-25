@@ -3,6 +3,10 @@ abstract type AbstractProviderObject end
 abstract type AbstractAttachment <: AbstractProviderObject end
 abstract type AbstractMessage <: AbstractProviderObject end
 
+#StructTypes.StructType(::Type{AbstractMessage}) = StructTypes.AbstractType()
+#StructTypes.subtypekey(::Type{AbstractMessage}) = :_type
+
+
 # Interface functions with default implementations
 role(msg::AbstractMessage) = error("role not implemented for $(typeof(msg))")
 content(msg::AbstractMessage) = error("content not implemented for $(typeof(msg))")

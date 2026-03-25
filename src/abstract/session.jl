@@ -10,6 +10,14 @@ session_created_at(session::AbstractSession) = error("session_created_at not imp
 session_updated_at(session::AbstractSession) = error("session_updated_at not implemented for $(typeof(session))")
 session_tools(session::AbstractSession) = error("session_tools not implemented for $(typeof(session))")
 
+function list_default_tools()
+    throw(MethodError(list_default_tools, ()))
+end
+
+function list_default_tools(session::Union{AbstractSession,Nothing})
+    throw(MethodError(list_default_tools, (session,)))
+end
+
 @enum SessionStatus SESSION_ACTIVE SESSION_PAUSED SESSION_CLOSED
 
 create_session(name; kwargs...) = error("create_session not implemented")
@@ -35,4 +43,3 @@ close_session!(manager::AbstractSessionManager, session_id) = error("close_sessi
 close_all_sessions!(manager::AbstractSessionManager) = error("close_all_sessions! not implemented for $(typeof(manager))")
 
 abstract type AbstractWorkflow end
-
