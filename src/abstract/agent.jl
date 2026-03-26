@@ -11,3 +11,12 @@ function chat(agent::AbstractAgent, message::String, attachments::Vector{<:Abstr
               stream::Bool=false, auto_tools::Bool=true)
     throw(MethodError(chat, (agent, message, attachments)))
 end
+
+# Generic functions for agent management - implementations in FlootyAgents
+function create_agent(name::AbstractString, provider_id::Symbol; kwargs...)
+    throw(MethodError(create_agent, (name, provider_id)))
+end
+
+function get_messages(ctx::AbstractContextStore)
+    throw(MethodError(get_messages, (ctx,)))
+end
