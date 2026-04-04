@@ -15,6 +15,8 @@ export role, content, tool_calls, tool_call_id, tool_name, images, attachment_pa
 export call_id, call_name, call_arguments
 export tool_description, tool_parameters, tool_signature
 export execute_tool, register_tool_handler!, get_tool_handler
+export register_tool_provider!, unregister_tool_provider!, 
+       get_all_tools, clear_tool_providers!
 export create_message, create_provider_instance, create_embedder, create_image_data, create_attachments, chat, chat_stream
 export create_stream
 export add_message!, clear_history!
@@ -26,5 +28,16 @@ export add_agent_to_session!, remove_agent_from_session!, get_agent_from_session
 export create_subagent_in_session!
 export get_session, get_active_session, set_active_session!, list_sessions, close_all_sessions!
 export AbstractPersistenceBackend, AbstractPersistable, save!, load, delete!, list, persistable_id
+# Protocol abstractions only (no concrete messages)
+export AbstractProtocol, AbstractProtocolMessage
+export AbstractClientRequest, AbstractServerMessage
+export AbstractProtocolSerializer, serialize, deserialize
+export AbstractProtocolHandler, AbstractClientProtocol, AbstractServerProtocol
+export AbstractProtocolConnection
+export AbstractMessageFactory, create_message
+export ProtocolTrait, BinaryProtocol, TextProtocol, protocol_trait
+export message_type
+export handle_client_request, handle_server_message
+export send_message, receive_message
 
 end # module FlootyAbstract
