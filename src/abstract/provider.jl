@@ -3,9 +3,13 @@ abstract type AbstractProviderObject end
 abstract type AbstractAttachment <: AbstractProviderObject end
 abstract type AbstractMessage <: AbstractProviderObject end
 
-#StructTypes.StructType(::Type{AbstractMessage}) = StructTypes.AbstractType()
-#StructTypes.subtypekey(::Type{AbstractMessage}) = :_type
+# OpenAI-compatible providers share the same API format
+# (OpenAI, OpenRouter, Chutes, Groq, Together, etc.)
+abstract type OpenAICompatibleProvider <: AbstractLLMProvider end
 
+# Anthropic-compatible providers share Claude's API format
+# (Anthropic, AWS Bedrock Claude, etc.)
+abstract type AnthropicCompatibleProvider <: AbstractLLMProvider end
 
 # Interface functions with default implementations
 role(msg::AbstractMessage) = error("role not implemented for $(typeof(msg))")
@@ -106,4 +110,20 @@ end
 
 function list_provider_models(::Val{provider_symbol}, config::Dict{Symbol,Any}) where {provider_symbol}
     throw(MethodError(list_provider_models, (Val(provider_symbol), config)))
+end
+
+# ═══════════════════════════════════════════════════════════════════════
+# Abstract Chat Response Interface
+# ═══════════════════════════════════════════════════════════════════════
+
+abstract type AbstractChatResponse end
+
+function response_message(response::AbstractChatResponse)
+    throw(MethodError(response_message, (response,)))
+end
+
+function response_has_tool_calls(response::AbstractChatResponse)
+    msg = response_message(response)
+    tcs = tool_calls(msg)
+    return tcs !== nothing && !isempty(tcs)
 end
