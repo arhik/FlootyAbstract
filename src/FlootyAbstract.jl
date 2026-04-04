@@ -40,4 +40,7 @@ export message_type
 export handle_client_request, handle_server_message
 export send_message, receive_message
 
+# Observable Protocol exports
+export logged_handle_request
+
 end # module FlootyAbstract
