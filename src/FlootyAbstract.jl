@@ -5,6 +5,9 @@ include("abstract.jl")
 export AbstractLLMProvider, AbstractProviderObject, AbstractAttachment, AbstractMessage
 export AbstractEmbedder, AbstractContextStore
 export AbstractTool, AbstractToolCall
+export AbstractModel, model_name, model_provider
+export list_provider_models
+export OpenAICompatibleProvider, AnthropicCompatibleProvider
 export AbstractAgent, role, provider, context, tools, chat, create_agent, list_default_tools, get_messages
 export ToolResult
 export AbstractFlootyError, ToolError, error_message
