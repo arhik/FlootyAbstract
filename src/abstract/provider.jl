@@ -24,15 +24,15 @@ function provider_name(provider::AbstractLLMProvider)
 end
 
 function create_message(provider::AbstractLLMProvider, role::String, content::String; kwargs...)
-    throw(MethodError(create_message, (provider, role, content)))
+    throw(MethodError(create_message, (provider, role, content, nothing)))
 end
 
-function create_message(provider::AbstractLLMProvider, role::String, content::String, images::Vector{<:AbstractProviderObject}; kwargs...)
+function create_message(provider::AbstractLLMProvider, role::String, content::String, images::Vector{<:AbstractProviderObject})
     throw(MethodError(create_message, (provider, role, content, images)))
 end
 
 # New interface: create message with attachments (replaces images)
-function create_message(provider::AbstractLLMProvider, role::String, content::String, attachments::Vector{<:AbstractAttachment}; kwargs...)
+function create_message(provider::AbstractLLMProvider, role::String, content::String, attachments::Vector{<:AbstractAttachment})
     throw(MethodError(create_message, (provider, role, content, attachments)))
 end
 
@@ -48,8 +48,8 @@ function create_attachments(provider::AbstractLLMProvider, paths::Vector{String}
 end
 
 # Legacy image data creation (deprecated in favor of attachments)
-function create_image_data(provider::AbstractLLMProvider, data::Union{String, Vector{UInt8}})
-    throw(MethodError(create_image_data, (provider, data)))
+function create_image_data(provider::AbstractLLMProvider, path::String)
+    throw(MethodError(create_image_data, (provider, path)))
 end
 
 function create_provider_instance(::Val{provider_symbol}; config::Dict{Symbol,Any} = Dict{Symbol, Any}()) where {provider_symbol}
