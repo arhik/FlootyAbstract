@@ -5,6 +5,7 @@ include("abstract.jl")
 export AbstractLLMProvider, AbstractProviderObject, AbstractAttachment, AbstractMessage
 export AbstractEmbedder, AbstractContextStore
 export AbstractTool, AbstractToolCall
+export web_search, web_fetch, web_search_tool, web_fetch_tool, default_web_search_provider
 export AbstractModel, model_name, model_provider
 export list_provider_models
 export OpenAICompatibleProvider, AnthropicCompatibleProvider
