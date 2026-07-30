@@ -127,3 +127,25 @@ function response_has_tool_calls(response::AbstractChatResponse)
     tcs = tool_calls(msg)
     return tcs !== nothing && !isempty(tcs)
 end
+
+# ═══════════════════════════════════════════════════════════════════════
+# Inference API URL Configuration
+# ═══════════════════════════════════════════════════════════════════════
+
+"""
+    set_inference_api_url(provider::AbstractLLMProvider, url::String) -> Int
+
+Set the API URL that the provider uses for inference forwarding.
+This allows the provider to forward inference requests to a custom URL
+(e.g. a NamedPorts proxy URL) instead of a raw port.
+
+Default implementation is a no-op (returns 0). Providers with P2P
+forwarding (e.g. PeerCompute) override this to configure their
+underlying transport.
+
+Called by FlootyCore after starting a provider to configure
+NamedPorts-based forwarding for stable client URLs.
+"""
+function set_inference_api_url(provider::AbstractLLMProvider, url::String)
+    return 0  # Default: no-op
+end

@@ -25,6 +25,7 @@ export register_tool_provider!, unregister_tool_provider!,
        get_all_tools, clear_tool_providers!
 export create_message, create_provider_instance, create_embedder, create_image_data, create_attachments, chat, chat_stream
 export create_stream
+export set_inference_api_url
 export add_message!, clear_history!
 export AbstractSession, AbstractSessionManager, SessionStatus, SESSION_ACTIVE, SESSION_PAUSED, SESSION_CLOSED
 export session_id, session_name, session_status, session_agents, session_workspace, session_context
@@ -34,6 +35,36 @@ export add_agent_to_session!, remove_agent_from_session!, get_agent_from_session
 export create_subagent_in_session!
 export get_session, get_active_session, set_active_session!, list_sessions, close_all_sessions!
 export AbstractPersistenceBackend, AbstractPersistable, save!, load, delete!, list, persistable_id
+export AbstractWorkspace, workspace_id, workspace_folders, workspace_permissions
+export add_folder_to_workspace!, remove_folder_from_workspace!, get_folder_from_workspace
+export AbstractPermission, permission_resource, permission_actions, check_permission
+export AbstractResource, resource_type
+export AbstractIdentity, identity_id, identity_type, identity_name
+export PermissionGrant, PermissionSet, PermissionCheckResult
+export grant_permission!, revoke_permission!
+export AbstractExecutionContext, context_session, context_workspace, context_tools, context_permissions, validate_context
+export AbstractWorkflow
+export AbstractApplication, application_name, application_type, initialize_application!, shutdown_application!
+export get_execution_context, handle_application_command, emit_event
+export AbstractNamedPort, namedport_name, namedport_url, namedport_port, namedport_pid, namedport_active
+export AbstractNamedPortManager, portmanager_register!, portmanager_unregister!, portmanager_get, portmanager_list, portmanager_resolve
+export AbstractCore, AbstractFrontend, AbstractCoreManager
+export CoreStatus, CORE_IDLE, CORE_RUNNING, CORE_STOPPING, CORE_STOPPED, CORE_ERROR
+export FrontendStatus, FRONTEND_CONNECTING, FRONTEND_CONNECTED, FRONTEND_DISCONNECTING, FRONTEND_DISCONNECTED, FRONTEND_ERROR
+export core_id, core_name, core_status, core_session_manager, core_port
+export start_core!, stop_core!, run_loop, core_handle_command
+export core_get_execution_context, core_emit_event
+export frontend_connected!, frontend_disconnected!, list_frontends
+export frontend_id, frontend_type, frontend_core_id, frontend_status
+export frontend_connect!, frontend_disconnect!
+export frontend_send, frontend_receive, frontend_handle_message
+export manager_start_core!, manager_stop_core!
+export manager_get_core, manager_list_cores, manager_running_cores
+export AbstractTransport, AbstractConnection
+export start_listening, stop_transport
+export transport_send, transport_broadcast, transport_connections
+export connection_id, connection_is_connected, connection_remote_addr
+
 # Protocol abstractions only (no concrete messages)
 export AbstractProtocol, AbstractProtocolMessage
 export AbstractClientRequest, AbstractServerMessage
