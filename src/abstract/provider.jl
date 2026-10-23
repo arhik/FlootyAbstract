@@ -140,7 +140,7 @@ This allows the provider to forward inference requests to a custom URL
 (e.g. a NamedPorts proxy URL) instead of a raw port.
 
 Default implementation is a no-op (returns 0). Providers with P2P
-forwarding (e.g. PeerCompute) override this to configure their
+forwarding (e.g. remote inference providers) override this to configure their
 underlying transport.
 
 Called by FlootyCore after starting a provider to configure
