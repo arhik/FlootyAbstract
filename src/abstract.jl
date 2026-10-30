@@ -1,6 +1,7 @@
 include("abstract/provider.jl")
 include("abstract/tools.jl")
 include("abstract/websearch.jl")
+include("abstract/speech.jl")
 include("abstract/exceptions.jl")
 include("abstract/agent.jl")
 include("abstract/persistence.jl")

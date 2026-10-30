@@ -10,6 +10,11 @@ export AbstractTool, AbstractToolCall
 export AbstractSearchResult, AbstractSearchResponse, AbstractFetchResponse, AbstractWebSearchProvider
 export result_title, result_url, result_content, search_results
 export fetch_title, fetch_content, fetch_links
+
+# Speech abstractions
+export AbstractSpeechResponse, AbstractSpeechProvider
+export speech, speech_audio, speech_format, speech_mime, speech_model
+export speech_voices, supports_speech
 export web_search, web_fetch, web_search_tool, web_fetch_tool, default_web_search_provider
 export AbstractModel, model_name, model_provider
 export list_provider_models
